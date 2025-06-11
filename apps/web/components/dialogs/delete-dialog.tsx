@@ -6,7 +6,9 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
+import { useFileActions } from "@/web/hooks/useFileActions";
 import { Button } from "@/components/ui/button";
+import { parseError } from "@/web/utils/error";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -19,9 +21,12 @@ interface DeleteDialogProps {
 }
 
 export function DeleteDialog({ open, onOpenChange, onDelete, itemName, itemType }: DeleteDialogProps) {
+	const { setSelectedItem } = useFileActions();
+
 	const handleDelete = async () => {
 		try {
 			await onDelete();
+			setSelectedItem(null);
 			toast.success(`${itemType === "folder" ? "Folder" : "File"} deleted successfully`);
 			onOpenChange(false);
 		} catch (err) {

@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/dialog";
 import { Folder, Search, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { parseError } from "@/web/utils/error";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 interface Destination {
@@ -41,18 +42,30 @@ export function MoveDialog({ open, onOpenChange, onMove, itemName, itemType }: M
 	const [selectedDestination, setSelectedDestination] = useState<string | null>(null);
 	const [searchQuery, setSearchQuery] = useState("");
 
+	// Reset state when the dialog closes
+	useEffect(() => {
+		if (!open) {
+			setSelectedDestination(null);
+			setSearchQuery("");
+		}
+	}, [open]);
+
 	const filteredDestinations = DESTINATIONS.filter(
 		destination =>
 			destination.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			destination.path.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
-	const handleMove = () => {
+	const handleMove = async () => {
 		if (!selectedDestination) return;
 
-		onMove(selectedDestination);
-		toast.success(`${itemType === "folder" ? "Folder" : "File"} moved successfully`);
-		onOpenChange(false);
+		try {
+			await onMove(selectedDestination);
+			toast.success(`${itemType === "folder" ? "Folder" : "File"} moved successfully`);
+			onOpenChange(false);
+		} catch (err) {
+			toast.error(parseError(err) ?? "Failed to move");
+		}
 	};
 
 	return (

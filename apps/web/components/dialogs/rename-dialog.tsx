@@ -6,7 +6,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -22,6 +22,11 @@ interface RenameDialogProps {
 
 export function RenameDialog({ open, onOpenChange, onRename, itemName, itemType }: RenameDialogProps) {
 	const [newName, setNewName] = useState(itemName);
+
+	// Keep input in sync with current item and dialog state
+	useEffect(() => {
+		setNewName(itemName);
+	}, [itemName, open]);
 
 	const handleRename = (event: FormEvent) => {
 		event.preventDefault();
