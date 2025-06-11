@@ -134,9 +134,9 @@ function FileActions({ file }: { file: FileItem }) {
 
 	const fileType: FileType = file.type === "folder" ? "folder" : "file";
 
- 	const handleDownload = () => {
- 		toast.success(`${file.type === "folder" ? "Folder" : "File"} "${file.name}" download started`);
- 	};
+	const handleDownload = () => {
+		toast.success(`${file.type === "folder" ? "Folder" : "File"} "${file.name}" download started`);
+	};
 
 	return (
 		<>
@@ -148,16 +148,16 @@ function FileActions({ file }: { file: FileItem }) {
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
-<DropdownMenuItem
-  onClick={() => {
-    const params = new URLSearchParams(window.location.search);
-    params.set("id", file.id);
-    router.push(`?${params.toString()}`);
-  }}
->
-    <Eye className="mr-2 h-4 w-4" />
-    Open
-</DropdownMenuItem>
+					<DropdownMenuItem
+						onClick={() => {
+							const params = new URLSearchParams(window.location.search);
+							params.set("id", file.id);
+							router.push(`?${params.toString()}`);
+						}}
+					>
+						<Eye className="mr-2 h-4 w-4" />
+						Open
+					</DropdownMenuItem>
 					<DropdownMenuItem>
 						<Share2 className="mr-2 h-4 w-4" />
 						Share
