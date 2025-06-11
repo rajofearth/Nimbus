@@ -49,8 +49,9 @@ export function useFileActions() {
 		console.log(`Delete ${selectedItem.type} ${selectedItem.id}`);
 		// Here you would call your actual delete API
 		toast.success(`${selectedItem.type === "folder" ? "Folder" : "File"} "${selectedItem.name}" deleted`);
+		setDeleteDialogOpen(false);
+		setSelectedItem(null);
 	};
-
 	const moveItem = (destinationId: string) => {
 		if (!selectedItem) return;
 		console.log(`Move ${selectedItem.type} ${selectedItem.id} to destination ${destinationId}`);
