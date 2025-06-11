@@ -37,6 +37,17 @@ const DESTINATIONS: Destination[] = [
 	{ id: "7", name: "Personal", path: "/Personal" },
 ];
 
+/**
+ * Displays a modal dialog for moving a file or folder to a selected destination.
+ *
+ * Allows users to search and select a destination from a list, then confirm or cancel the move operation. The move action is only enabled when a destination is selected.
+ *
+ * @param open - Controls whether the dialog is visible.
+ * @param onOpenChange - Callback to update the dialog's open state.
+ * @param onMove - Callback invoked with the selected destination ID when the move is confirmed.
+ * @param itemName - Name of the item being moved.
+ * @param itemType - Type of the item being moved, either "file" or "folder".
+ */
 export function MoveDialog({ open, onOpenChange, onMove, itemName, itemType }: MoveDialogProps) {
 	const [selectedDestination, setSelectedDestination] = useState<string | null>(null);
 	const [searchQuery, setSearchQuery] = useState("");

@@ -18,10 +18,25 @@ import type { FileItem } from "@/web/lib/types";
 import { toast } from "sonner";
 import Link from "next/link";
 
+/**
+ * Renders file data in either a grid or list view based on the selected mode.
+ *
+ * @param viewMode - Determines whether files are displayed in a "grid" or "list" layout.
+ * @param data - Array of file and folder items to display.
+ *
+ * @returns The file browser UI in the specified view mode.
+ */
 export function FileBrowserData({ viewMode, data }: { viewMode: "grid" | "list"; data: FileItem[] }) {
 	return viewMode === "grid" ? <FilesGrid data={data} /> : <FilesList data={data} />;
 }
 
+/**
+ * Displays a collection of files and folders in a responsive grid layout.
+ *
+ * Renders each file or folder as a card with an icon, name, modification date, and an action menu. If the data array is empty, shows a placeholder message.
+ *
+ * @param data - Array of file and folder items to display.
+ */
 function FilesGrid({ data }: { data: FileItem[] }) {
 	const searchParams = useSearchParams();
 
@@ -66,6 +81,13 @@ function FilesGrid({ data }: { data: FileItem[] }) {
 	);
 }
 
+/**
+ * Renders a list view of files and folders in a table format.
+ *
+ * Displays file name, modification date, size, and available actions for each item. Shows a message if no files are present.
+ *
+ * @param data - Array of file and folder items to display.
+ */
 function FilesList({ data }: { data: FileItem[] }) {
 	const searchParams = useSearchParams();
 
@@ -114,6 +136,13 @@ function FilesList({ data }: { data: FileItem[] }) {
 	);
 }
 
+/**
+ * Renders a dropdown menu and action dialogs for file or folder operations.
+ *
+ * Provides options to open, share, download (for files), rename, move, or delete the given file or folder. Action dialogs for renaming, moving, and deleting are conditionally displayed based on user interaction.
+ *
+ * @param file - The file or folder for which actions are available.
+ */
 function FileActions({ file }: { file: FileItem }) {
 	const {
 		handleRenameAction,

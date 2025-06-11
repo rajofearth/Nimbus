@@ -18,6 +18,14 @@ interface DeleteDialogProps {
 	itemType: "file" | "folder";
 }
 
+/**
+ * Displays a confirmation dialog for deleting a file or folder.
+ *
+ * Renders a modal dialog prompting the user to confirm deletion of the specified item. Upon confirmation, invokes the deletion handler, shows a success notification, and closes the dialog.
+ *
+ * @param itemName - The name of the file or folder to be deleted.
+ * @param itemType - The type of item to delete, either "file" or "folder".
+ */
 export function DeleteDialog({ open, onOpenChange, onDelete, itemName, itemType }: DeleteDialogProps) {
 	const handleDelete = () => {
 		onDelete();

@@ -9,6 +9,13 @@ export interface FileActionItem {
 	type: FileType;
 }
 
+/**
+ * Provides state and handlers for managing file and folder actions, including rename, delete, and move, along with their associated dialog states.
+ *
+ * @returns An object containing dialog open states and setters, the currently selected item, action trigger functions to open dialogs, and action execution functions for renaming, deleting, and moving items.
+ *
+ * @remark This hook does not perform actual API calls for file operations; it only manages UI state and displays success notifications.
+ */
 export function useFileActions() {
 	// Dialog states
 	const [renameDialogOpen, setRenameDialogOpen] = useState(false);

@@ -14,6 +14,11 @@ interface FolderContentItem extends FileItem {
 	path?: string;
 }
 
+/**
+ * Displays a preview pane for a file or folder based on the `id` query parameter in the URL.
+ *
+ * Fetches and displays file metadata and, if the file is a folder, its contents. Handles loading and error states, and allows closing the preview by updating the URL.
+ */
 export function FilePreview() {
 	const router = useRouter();
 	const searchParams = useSearchParams();

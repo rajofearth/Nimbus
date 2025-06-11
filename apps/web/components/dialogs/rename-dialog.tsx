@@ -20,6 +20,14 @@ interface RenameDialogProps {
 	itemType: "file" | "folder";
 }
 
+/**
+ * Displays a modal dialog for renaming a file or folder.
+ *
+ * Presents a form allowing the user to enter a new name for the specified item. On submission, validates the input, invokes the rename callback with the trimmed new name, closes the dialog, and shows a success notification.
+ *
+ * @param itemName - The current name of the item to be renamed.
+ * @param itemType - The type of item being renamed, either "file" or "folder".
+ */
 export function RenameDialog({ open, onOpenChange, onRename, itemName, itemType }: RenameDialogProps) {
 	const [newName, setNewName] = useState(itemName);
 

@@ -167,6 +167,15 @@ const extensionCategoryMap: Record<string, string> = {
 	"7z": "archive",
 };
 
+/**
+ * Renders an icon representing the file type based on the provided file extension.
+ *
+ * Displays a category-specific icon for recognized file extensions, or a generic file icon for unknown types.
+ *
+ * @param extension - The file extension to determine the icon.
+ * @param className - Optional CSS class for styling the icon.
+ * @returns A React element displaying the appropriate file type icon.
+ */
 export function FileIcon({ extension, className }: FileIconProps) {
 	// Get the category for the extension
 	const category = extensionCategoryMap[extension.toLowerCase()] || "unknown";
@@ -175,13 +184,24 @@ export function FileIcon({ extension, className }: FileIconProps) {
 	return getIconByCategory(category, { className });
 }
 
-// Function to determine file type from filename
+/**
+ * Extracts and returns the lowercase file extension from a filename.
+ *
+ * @param filename - The name of the file to extract the extension from.
+ * @returns The file extension in lowercase, or an empty string if none is found.
+ */
 export function getFileExtension(filename: string): string {
 	const parts = filename.split(".");
 	return parts.length > 1 ? parts.pop()?.toLowerCase() || "" : "";
 }
 
-// Function to get icon for a file
+/**
+ * Returns a file type icon component corresponding to the extension of the given filename.
+ *
+ * @param filename - The name of the file whose icon should be rendered.
+ * @param className - Optional CSS class name to apply to the icon.
+ * @returns A {@link FileIcon} component representing the file type.
+ */
 export function getFileIcon(filename: string, className?: string) {
 	const extension = getFileExtension(filename);
 	return <FileIcon extension={extension} className={className} />;
