@@ -19,10 +19,14 @@ interface DeleteDialogProps {
 }
 
 export function DeleteDialog({ open, onOpenChange, onDelete, itemName, itemType }: DeleteDialogProps) {
-	const handleDelete = () => {
-		onDelete();
-		toast.success(`${itemType === "folder" ? "Folder" : "File"} deleted successfully`);
-		onOpenChange(false);
+	const handleDelete = async () => {
+		try {
+			await onDelete();
+			toast.success(`${itemType === "folder" ? "Folder" : "File"} deleted successfully`);
+			onOpenChange(false);
+		} catch (err) {
+			toast.error(parseError(err) ?? "Failed to delete");
+		}
 	};
 
 	return (
