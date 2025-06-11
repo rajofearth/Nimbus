@@ -134,10 +134,9 @@ function FileActions({ file }: { file: FileItem }) {
 
 	const fileType: FileType = file.type === "folder" ? "folder" : "file";
 
-	const handleDownload = () => {
-		console.log(`Download ${file.type} ${file.id}`);
-		toast.success(`${file.type === "folder" ? "Folder" : "File"} "${file.name}" download started`);
-	};
+ 	const handleDownload = () => {
+ 		toast.success(`${file.type === "folder" ? "Folder" : "File"} "${file.name}" download started`);
+ 	};
 
 	return (
 		<>
